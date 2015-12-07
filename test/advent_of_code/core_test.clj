@@ -1,7 +1,7 @@
 (ns advent-of-code.core-test
   (:require [clojure.test :refer :all]
             [advent-of-code.day01.core :refer [find-floor]]
-            [advent-of-code.day02.core :refer [find-area]]
+            [advent-of-code.day02.core :refer [find-area find-ribbon]]
             [advent-of-code.day03.core :refer [find-houses]]
             [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
             [advent-of-code.day05.core :refer [nice-string]]
@@ -20,6 +20,11 @@
   (testing "Area."
     (is (= 58 (find-area "2x3x4")))
     (is (= 43 (find-area "1x1x10")))))
+
+(deftest day-02-2
+  (testing "Ribbon."
+    (is (= 34 (find-ribbon "2x3x4")))
+    (is (= 14 (find-ribbon "1x1x10")))))
 
 (deftest day-03
   (testing "Houses."
