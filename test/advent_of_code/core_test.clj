@@ -4,7 +4,8 @@
             [advent-of-code.day02.core :refer [find-area]]
             [advent-of-code.day03.core :refer [find-houses]]
             [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
-            [advent-of-code.day05.core :refer [nice-string]]))
+            [advent-of-code.day05.core :refer [nice-string]]
+            [advent-of-code.day06.core :refer [run-instructions]]))
 
 (deftest day-01
   (testing "Floor."
@@ -43,3 +44,10 @@
     (is (= false (nice-string "jchzalrnumimnmhp")))
     (is (= false (nice-string "haegwjzuvuyypxyu")))
     (is (= false (nice-string "dvszwmarrgswjxmb")))))
+
+(deftest day-06
+  (testing "Illuminations"
+    (is (= 9 (run-instructions 3 3 ["turn on 0,0 through 2,2"])))
+    (is (= 4 (run-instructions 3 3 ["turn on 0,0 through 1,1"])))
+    (is (= 5 (run-instructions 3 3 ["turn on 0,0 through 2,2" "turn off 0,0 through 1,1"])))
+    (is (= 4 (run-instructions 3 3 ["turn on 0,0 through 2,2" "turn off 0,0 through 1,1" "toggle 0,0 through 2,2"])))))
