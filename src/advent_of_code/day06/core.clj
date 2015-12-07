@@ -18,6 +18,15 @@
         new (if (= 0 current) 1 0)]
     (assoc-in grid [y x] new)))
 
+(defn turn-on-2 [grid x y]
+  (update-in grid [y x] inc))
+
+(defn turn-off-2 [grid x y]
+  (update-in grid [y x] (fn [v] (max 0 (dec v)))))
+
+(defn toggle-2 [grid x y]
+  (update-in grid [y x] #(+ 2 %)))
+
 (defn row-sums [grid]
   (mapv (fn [g] (reduce + 0 g)) grid))
 
@@ -71,8 +80,42 @@
     (count-grid grid)))
 
 
+(defn do-operation-2 [grid x y operation]
+  (case operation
+    :turn-on (turn-on-2 grid x y)
+    :turn-off (turn-off-2 grid x y)
+    :toggle (toggle-2 grid x y)
+    nil))
+
+(defn process-columns-2 [grid y tx bx operation]
+  (loop [grid grid
+          x tx]
+    (if (> x bx)
+      grid
+      (recur (do-operation-2 grid x y operation) (inc x)))))
+
+(defn process-rows-2 [grid tx ty bx by operation]
+  (loop [grid grid
+          y ty]
+    (if (> y by)
+      grid
+      (recur (process-columns-2 grid y tx bx operation) (inc y)))))
+
+(defn process-instruction-2 [grid instruction]
+  (let [{:keys [:top-left :bottom-right :operation]} (parse-instruction instruction)
+        [tx ty] top-left
+        [bx by] bottom-right]
+    (process-rows-2 grid tx ty bx by operation)))
+
+(defn run-instructions-2 [width height instructions]
+  (let [grid (make-grid width height)
+        grid (reduce process-instruction-2 grid instructions)]
+    (count-grid grid)))
+
 (defn run []
   (let [input (slurp "src/advent_of_code/day06/input.txt")
         lines (str/split input #"\n")
-        count (run-instructions 1000 1000 lines)]
-    (println "Day 06:" count)))
+        count (run-instructions 1000 1000 lines)
+        count-2 (run-instructions-2 1000 1000 lines)]
+    (println "Day 06, part 1:" count)
+    (println "Day 06, part 2:" count-2)))
