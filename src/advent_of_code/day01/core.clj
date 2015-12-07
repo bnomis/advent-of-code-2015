@@ -1,7 +1,6 @@
 (ns advent-of-code.day01.core)
 
 (defn find-floor [input]
-  ;;(println input)
   (let [count (reduce (fn [acc i]
                         (if (= \( i)
                           (inc acc)
