@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [advent-of-code.day01.core :refer [find-floor]]
             [advent-of-code.day02.core :refer [find-area find-ribbon]]
-            [advent-of-code.day03.core :refer [find-houses]]
+            [advent-of-code.day03.core :refer [find-houses find-houses-robo]]
             [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
             [advent-of-code.day05.core :refer [nice-string]]
             [advent-of-code.day06.core :refer [run-instructions]]))
@@ -28,9 +28,15 @@
 
 (deftest day-03
   (testing "Houses."
-    (is (= 2 (find-houses (list \>))))
-    (is (= 4 (find-houses (list \^ \> \v \<))))
-    (is (= 2 (find-houses (list \^ \v \^ \v \^ \v \^ \v \^ \v))))))
+    (is (= 2 (count (find-houses (list \>)))))
+    (is (= 4 (count (find-houses (list \^ \> \v \<)))))
+    (is (= 2 (count (find-houses (list \^ \v \^ \v \^ \v \^ \v \^ \v)))))))
+
+(deftest day-03-2
+  (testing "Houses with robo santa."
+    (is (= 3 (count (find-houses-robo (list \^ \v)))))
+    (is (= 3 (count (find-houses-robo (list \^ \> \v \<)))))
+    (is (= 11 (count (find-houses-robo (list \^ \v \^ \v \^ \v \^ \v \^ \v)))))))
 
 (deftest day-04-hash
   (testing "Hash identifier"
