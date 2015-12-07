@@ -3,7 +3,8 @@
             [advent-of-code.day01.core :refer [find-floor]]
             [advent-of-code.day02.core :refer [find-area]]
             [advent-of-code.day03.core :refer [find-houses]]
-            [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]))
+            [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
+            [advent-of-code.day05.core :refer [nice-string]]))
 
 (deftest day-01
   (testing "Floor."
@@ -34,3 +35,11 @@
   (testing "Hashes"
     (is (= 609043 (find-number "abcdef")))
     (is (= 1048970 (find-number "pqrstuv")))))
+
+(deftest day-05
+  (testing "Nice strings"
+    (is (= true (nice-string "ugknbfddgicrmopn")))
+    (is (= true (nice-string "aaa")))
+    (is (= false (nice-string "jchzalrnumimnmhp")))
+    (is (= false (nice-string "haegwjzuvuyypxyu")))
+    (is (= false (nice-string "dvszwmarrgswjxmb")))))
