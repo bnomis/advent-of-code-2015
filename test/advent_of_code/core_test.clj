@@ -4,7 +4,7 @@
             [advent-of-code.day02.core :refer [find-area find-ribbon]]
             [advent-of-code.day03.core :refer [find-houses find-houses-robo]]
             [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
-            [advent-of-code.day05.core :refer [nice-string]]
+            [advent-of-code.day05.core :refer [nice-string nice-string-2]]
             [advent-of-code.day06.core :refer [run-instructions]]))
 
 (deftest day-01
@@ -55,6 +55,15 @@
     (is (= false (nice-string "jchzalrnumimnmhp")))
     (is (= false (nice-string "haegwjzuvuyypxyu")))
     (is (= false (nice-string "dvszwmarrgswjxmb")))))
+
+(deftest day-05-2
+  (testing "Super nice strings"
+    (is (= true (nice-string-2 "qjhvhtzxzqqjkmpb")))
+    (is (= true (nice-string-2 "xxyxx")))
+    (is (= false (nice-string-2 "uurcxstgmygtbstg")))
+    (is (= false (nice-string-2 "ieodomkazucvgmuy")))
+    (is (= false (nice-string-2 "dieatyxxxlvhneoj")))))
+
 
 (deftest day-06
   (testing "Illuminations"

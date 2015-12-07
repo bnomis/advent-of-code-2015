@@ -47,6 +47,75 @@
       true
       false)))
 
+(defn match [p pairs]
+  (loop [l (first pairs)
+          pairs (rest pairs)]
+    ;;(println "matching:" l p)
+    (if-not l
+      false
+      (if (= l p)
+        (do
+          ;;(println "matched:" l p)
+          true)
+        (recur (first pairs) (rest pairs))))))
+
+(defn check-pairs [pairs]
+  ;;(println "check-pairs:" pairs)
+  (loop [p (first pairs)
+          pairs (rest pairs)]
+    (if-not p
+      nil
+      ;; no overlap
+      (if (match p (rest pairs))
+        p
+        (recur (first pairs) (rest pairs))))))
+
+(defn join-two [c1 c2]
+  (str/join [(str c1) (str c2)]))
+
+(defn make-pairs [chars]
+  (let [chars (mapv str chars)
+        length (count chars)]
+    (loop [pairs [(join-two (nth chars 0) (nth chars 1))]
+            index 1]
+      (if (>= index (- length 1))
+        pairs
+        (recur (conj pairs (join-two (nth chars index) (nth chars (+ 1 index)))) (inc index))))))
+
+(defn has-pair [input]
+  (let [p (check-pairs (make-pairs (seq input)))]
+    (if p
+      p
+      false)))
+
+(defn has-pair2 [input]
+  (let [p (check-pairs (make-pairs (seq input)))]
+    (if p
+      p
+      (let [p (check-pairs (make-pairs (rest (seq input))))]
+        (if p
+          p
+          false)))))
+
+(defn has-repeat [input]
+  (let [chars (seq input)
+        length (count chars)]
+    (loop [index 0]
+      (if (> index (- length 3))
+        false
+        (if (= (nth chars index) (nth chars (+ index 2)))
+          index
+          (recur (inc index)))))))
+
+(defn nice-string-2 [input]
+  (let [p (has-pair input)
+        r (has-repeat input)]
+    (if (and p r)
+      (do
+        ;;(println "nice:" input p r)
+        true)
+      false)))
+
 (defn run []
   (let [input (slurp "src/advent_of_code/day05/input.txt")
         lines (str/split input #"\n")
@@ -54,5 +123,11 @@
                         (if (nice-string l)
                           (inc acc)
                           acc))
-                0 lines)]
-    (println "Day 05:" count)))
+                0 lines)
+        count-2 (reduce (fn [acc l]
+                          (if (nice-string-2 l)
+                            (inc acc)
+                            acc))
+                  0 lines)]
+    (println "Day 05, part 1:" count)
+    (println "Day 05, part 2:" count-2)))
