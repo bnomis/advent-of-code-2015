@@ -1,0 +1,20 @@
+44430 -> b
+b RSHIFT 2 -> d
+b RSHIFT 3 -> e
+b RSHIFT 5 -> f
+e OR f -> g
+e AND f -> h
+NOT h -> i
+g AND i -> j
+d OR j -> k
+d AND j -> l
+NOT l -> m
+k AND m -> n
+b OR n -> o
+b AND n -> p
+NOT p -> q
+o AND q -> r
+1 AND r -> s
+b RSHIFT 1 -> v
+s LSHIFT 15 -> w
+v OR w -> x

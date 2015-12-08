@@ -5,7 +5,8 @@
             [advent-of-code.day03.core :refer [find-houses find-houses-robo]]
             [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
             [advent-of-code.day05.core :refer [nice-string nice-string-2]]
-            [advent-of-code.day06.core :refer [run-instructions]]))
+            [advent-of-code.day06.core :refer [run-instructions]]
+            [advent-of-code.day07.core :refer [run-circuit]]))
 
 (deftest day-01
   (testing "Floor."
@@ -64,10 +65,21 @@
     (is (= false (nice-string-2 "ieodomkazucvgmuy")))
     (is (= false (nice-string-2 "dieatyxxxlvhneoj")))))
 
-
 (deftest day-06
   (testing "Illuminations"
     (is (= 9 (run-instructions 3 3 ["turn on 0,0 through 2,2"])))
     (is (= 4 (run-instructions 3 3 ["turn on 0,0 through 1,1"])))
     (is (= 5 (run-instructions 3 3 ["turn on 0,0 through 2,2" "turn off 0,0 through 1,1"])))
     (is (= 4 (run-instructions 3 3 ["turn on 0,0 through 2,2" "turn off 0,0 through 1,1" "toggle 0,0 through 2,2"])))))
+
+(deftest day-07
+  (testing "Circuits"
+    (is (= {:x 123} (run-circuit ["123 -> x"])))
+    (is (= {:x 123 :y 456} (run-circuit ["123 -> x" "456 -> y"])))
+    (is (= {:d 72 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d"])))
+    (is (= {:d 72 :e 507 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e"])))
+    (is (= {:d 72 :e 507 :f 492 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e" "x LSHIFT 2 -> f"])))
+    (is (= {:d 72 :e 507 :f 492 :g 114 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e" "x LSHIFT 2 -> f" "y RSHIFT 2 -> g"])))
+    (is (= {:d 72 :e 507 :f 492 :g 114 :h 65412 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e" "x LSHIFT 2 -> f" "y RSHIFT 2 -> g" "NOT x -> h"])))
+    (is (= {:d 72 :e 507 :f 492 :g 114 :h 65412 :i 65079 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e" "x LSHIFT 2 -> f" "y RSHIFT 2 -> g" "NOT x -> h" "NOT y -> i"])))
+    (is (= {:cc 123 :cd 1} (run-circuit ["123 -> cc" "1 AND cc -> cd"])))))
