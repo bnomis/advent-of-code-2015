@@ -6,7 +6,8 @@
             [advent-of-code.day04.core :refer [find-number make-hash starts-with-five-zeros]]
             [advent-of-code.day05.core :refer [nice-string nice-string-2]]
             [advent-of-code.day06.core :refer [run-instructions]]
-            [advent-of-code.day07.core :refer [run-circuit]]))
+            [advent-of-code.day07.core :refer [run-circuit]]
+            [advent-of-code.day08.core :refer [parse-file parse-file-2]]))
 
 (deftest day-01
   (testing "Floor."
@@ -83,3 +84,16 @@
     (is (= {:d 72 :e 507 :f 492 :g 114 :h 65412 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e" "x LSHIFT 2 -> f" "y RSHIFT 2 -> g" "NOT x -> h"])))
     (is (= {:d 72 :e 507 :f 492 :g 114 :h 65412 :i 65079 :x 123 :y 456} (run-circuit ["123 -> x" "456 -> y" "x AND y -> d" "x OR y -> e" "x LSHIFT 2 -> f" "y RSHIFT 2 -> g" "NOT x -> h" "NOT y -> i"])))
     (is (= {:cc 123 :cd 1} (run-circuit ["123 -> cc" "1 AND cc -> cd"])))))
+
+(deftest day-08
+  (testing "Reading"
+    (is (= 2 (parse-file "src/advent_of_code/day08/input-test-01.txt")))
+    (is (= 2 (parse-file "src/advent_of_code/day08/input-test-02.txt")))
+    (is (= 3 (parse-file "src/advent_of_code/day08/input-test-03.txt")))
+    (is (= 5 (parse-file "src/advent_of_code/day08/input-test-04.txt")))
+    (is (= 9 (parse-file "src/advent_of_code/day08/input-test-05.txt")))
+    (is (= 4 (parse-file-2 "src/advent_of_code/day08/input-test-01.txt")))
+    (is (= 4 (parse-file-2 "src/advent_of_code/day08/input-test-02.txt")))
+    (is (= 6 (parse-file-2 "src/advent_of_code/day08/input-test-03.txt")))
+    (is (= 5 (parse-file-2 "src/advent_of_code/day08/input-test-04.txt")))
+    (is (= 8 (parse-file-2 "src/advent_of_code/day08/input-test-05.txt")))))
