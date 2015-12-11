@@ -1,0 +1,6 @@
+London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141
+London to Grimsby = 555
+Grimsby to Dublin = 666
+Grimsby to Belfast = 777

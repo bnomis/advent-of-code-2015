@@ -7,7 +7,8 @@
             [advent-of-code.day05.core :refer [nice-string nice-string-2]]
             [advent-of-code.day06.core :refer [run-instructions]]
             [advent-of-code.day07.core :refer [run-circuit]]
-            [advent-of-code.day08.core :refer [parse-file parse-file-2]]))
+            [advent-of-code.day08.core :refer [parse-file parse-file-2]]
+            [advent-of-code.day09.core :refer [find-shortest find-longest]]))
 
 (deftest day-01
   (testing "Floor."
@@ -97,3 +98,8 @@
     (is (= 6 (parse-file-2 "src/advent_of_code/day08/input-test-03.txt")))
     (is (= 5 (parse-file-2 "src/advent_of_code/day08/input-test-04.txt")))
     (is (= 8 (parse-file-2 "src/advent_of_code/day08/input-test-05.txt")))))
+
+(deftest day-09
+  (testing "Travelling"
+    (is (= 605 (find-shortest "src/advent_of_code/day09/input-test.txt")))
+    (is (= 982 (find-longest "src/advent_of_code/day09/input-test.txt")))))
