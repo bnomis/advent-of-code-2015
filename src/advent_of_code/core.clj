@@ -9,7 +9,8 @@
     [advent-of-code.day06.core]
     [advent-of-code.day07.core]
     [advent-of-code.day08.core]
-    [advent-of-code.day09.core]))
+    [advent-of-code.day09.core]
+    [advent-of-code.day10.core]))
 
 
 (defn run-all []
@@ -21,11 +22,13 @@
   (advent-of-code.day06.core/run)
   (advent-of-code.day07.core/run)
   (advent-of-code.day08.core/run)
-  (advent-of-code.day09.core/run))
+  (advent-of-code.day09.core/run)
+  (advent-of-code.day10.core/run))
 
 (defn run-day [day]
   (let [day (Integer/parseInt day)
-        fn (format "(advent-of-code.day%02d.core/run)" day)]
+        fmt (if (< day 10) "(advent-of-code.day%02d.core/run)" "(advent-of-code.day%d.core/run)")
+        fn (format fmt day)]
     (eval (read-string fn))))
 
 (defn -main

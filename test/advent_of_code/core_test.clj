@@ -8,7 +8,8 @@
             [advent-of-code.day06.core :refer [run-instructions]]
             [advent-of-code.day07.core :refer [run-circuit]]
             [advent-of-code.day08.core :refer [parse-file parse-file-2]]
-            [advent-of-code.day09.core :refer [find-shortest find-longest]]))
+            [advent-of-code.day09.core :refer [find-shortest find-longest]]
+            [advent-of-code.day10.core :refer [encode encode-loop]]))
 
 (deftest day-01
   (testing "Floor."
@@ -103,3 +104,12 @@
   (testing "Travelling"
     (is (= 605 (find-shortest "src/advent_of_code/day09/input-test.txt")))
     (is (= 982 (find-longest "src/advent_of_code/day09/input-test.txt")))))
+
+(deftest day-10
+  (testing "Encoding"
+    (is (= "11" (encode "1")))
+    (is (= "21" (encode "11")))
+    (is (= "1211" (encode "21")))
+    (is (= "111221" (encode "1211")))
+    (is (= "312211" (encode "111221")))
+    (is (= "312211" (encode-loop "1" 5)))))
