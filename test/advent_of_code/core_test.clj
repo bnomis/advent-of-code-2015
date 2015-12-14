@@ -9,7 +9,8 @@
             [advent-of-code.day07.core :refer [run-circuit]]
             [advent-of-code.day08.core :refer [parse-file parse-file-2]]
             [advent-of-code.day09.core :refer [find-shortest find-longest]]
-            [advent-of-code.day10.core :refer [encode encode-loop]]))
+            [advent-of-code.day10.core :refer [encode encode-loop]]
+            [advent-of-code.day11.core :refer [inc-alpha-number inc-alpha-numbers good-password-str next-password str->nums nums->str]]))
 
 (deftest day-01
   (testing "Floor."
@@ -113,3 +114,27 @@
     (is (= "111221" (encode "1211")))
     (is (= "312211" (encode "111221")))
     (is (= "312211" (encode-loop "1" 5)))))
+
+(deftest day-11
+  (testing "Incrementing"
+    (is (= 1 (inc-alpha-number 0)))
+    (is (= 6 (inc-alpha-number 5)))
+    (is (= 16 (inc-alpha-number 15)))
+    (is (= 0 (inc-alpha-number 25)))
+    (is (= [0 1] (inc-alpha-numbers [0 0])))
+    (is (= [1 0] (inc-alpha-numbers [0 25])))
+    (is (= [0 0] (inc-alpha-numbers [25 25])))
+    (is (= [1 0 0] (inc-alpha-numbers [0 25 25])))
+    (is (= [1 2 4] (inc-alpha-numbers [1 2 3])))
+    (is (= [1 25 4] (inc-alpha-numbers [1 25 3])))
+    (is (= [2 0 0] (inc-alpha-numbers [1 25 25]))))
+  (testing "Conversion"
+    (is (= [0 1 2 3 4 5 6 7] (str->nums "abcdefgh")))
+    (is (= "abcdefgh" (nums->str [0 1 2 3 4 5 6 7]))))
+  (testing "Passwords"
+    (is (= false (good-password-str "hijklmmn")))
+    (is (= false (good-password-str "abbceffg")))
+    (is (= false (good-password-str "abbcegjk"))))
+  (testing "Generation"
+    (is (= "abcdffaa" (next-password "abcdefgh")))
+    (is (= "ghjaabcc" (next-password "ghijklmn")))))
