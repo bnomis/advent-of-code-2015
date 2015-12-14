@@ -12,7 +12,8 @@
     [advent-of-code.day09.core]
     [advent-of-code.day10.core]
     [advent-of-code.day11.core]
-    [advent-of-code.day12.core]))
+    [advent-of-code.day12.core]
+    [advent-of-code.day13.core]))
 
 (defn run-all []
   (advent-of-code.day01.core/run)
@@ -26,7 +27,8 @@
   (advent-of-code.day09.core/run)
   (advent-of-code.day10.core/run)
   (advent-of-code.day11.core/run)
-  (advent-of-code.day12.core/run))
+  (advent-of-code.day12.core/run)
+  (advent-of-code.day13.core/run))
 
 (defn run-day [day]
   (let [day (Integer/parseInt day)
