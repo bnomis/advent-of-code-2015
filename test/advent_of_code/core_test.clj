@@ -10,7 +10,8 @@
             [advent-of-code.day08.core :refer [parse-file parse-file-2]]
             [advent-of-code.day09.core :refer [find-shortest find-longest]]
             [advent-of-code.day10.core :refer [encode encode-loop]]
-            [advent-of-code.day11.core :refer [inc-alpha-number inc-alpha-numbers good-password-str next-password str->nums nums->str]]))
+            [advent-of-code.day11.core :refer [inc-alpha-number inc-alpha-numbers good-password-str next-password str->nums nums->str]]
+            [advent-of-code.day12.core :refer [read-numbers]]))
 
 (deftest day-01
   (testing "Floor."
@@ -138,3 +139,10 @@
   (testing "Generation"
     (is (= "abcdffaa" (next-password "abcdefgh")))
     (is (= "ghjaabcc" (next-password "ghijklmn")))))
+
+(deftest day-12
+  (testing "Numbers"
+    (is (= 1 (read-numbers "src/advent_of_code/day12/input-test-01.txt")))
+    (is (= 6 (read-numbers "src/advent_of_code/day12/input-test-02.txt")))
+    (is (= 0 (read-numbers "src/advent_of_code/day12/input-test-03.txt")))
+    (is (= 24 (read-numbers "src/advent_of_code/day12/input-test-04.txt")))))
