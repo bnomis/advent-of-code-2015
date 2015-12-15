@@ -12,7 +12,8 @@
             [advent-of-code.day10.core :refer [encode encode-loop]]
             [advent-of-code.day11.core :refer [inc-alpha-number inc-alpha-numbers good-password-str next-password str->nums nums->str]]
             [advent-of-code.day12.core :refer [read-numbers]]
-            [advent-of-code.day14.core :refer [process-file process-points]]))
+            [advent-of-code.day14.core :refer [process-file process-points]]
+            [advent-of-code.day15.core :refer [max-score max-score-calories]]))
 
 (deftest day-01
   (testing "Floor."
@@ -152,3 +153,9 @@
   (testing "Distance"
     (is (= 1120 (process-file "src/advent_of_code/day14/input-test.txt" 1000)))
     (is (= 689 (process-points "src/advent_of_code/day14/input-test.txt" 1000)))))
+
+
+(deftest day-15
+  (testing "Scores"
+    (is (= 62842880 (max-score "src/advent_of_code/day15/input-test.txt")))
+    (is (= 57600000 (max-score-calories "src/advent_of_code/day15/input-test.txt" 500)))))
