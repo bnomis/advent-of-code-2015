@@ -13,7 +13,8 @@
             [advent-of-code.day11.core :refer [inc-alpha-number inc-alpha-numbers good-password-str next-password str->nums nums->str]]
             [advent-of-code.day12.core :refer [read-numbers]]
             [advent-of-code.day14.core :refer [process-file process-points]]
-            [advent-of-code.day15.core :refer [max-score max-score-calories]]))
+            [advent-of-code.day15.core :refer [max-score max-score-calories]]
+            [advent-of-code.day17.core :refer [find-target-combos]]))
 
 (deftest day-01
   (testing "Floor."
@@ -159,3 +160,7 @@
   (testing "Scores"
     (is (= 62842880 (max-score "src/advent_of_code/day15/input-test.txt")))
     (is (= 57600000 (max-score-calories "src/advent_of_code/day15/input-test.txt" 500)))))
+
+(deftest day-17
+  (testing "Combinations"
+    (is (= 4 (count (find-target-combos "src/advent_of_code/day17/input-test.txt" 25))))))
