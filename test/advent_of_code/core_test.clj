@@ -14,7 +14,8 @@
             [advent-of-code.day12.core :refer [read-numbers]]
             [advent-of-code.day14.core :refer [process-file process-points]]
             [advent-of-code.day15.core :refer [max-score max-score-calories]]
-            [advent-of-code.day17.core :refer [find-target-combos]]))
+            [advent-of-code.day17.core :refer [find-target-combos]]
+            [advent-of-code.day18.core :refer [animate-file]]))
 
 (deftest day-01
   (testing "Floor."
@@ -164,3 +165,9 @@
 (deftest day-17
   (testing "Combinations"
     (is (= 4 (count (find-target-combos "src/advent_of_code/day17/input-test.txt" 25))))))
+
+
+(deftest day-18
+  (testing "Animation"
+    (is (= 4 (animate-file "src/advent_of_code/day18/input-test.txt" 4 false)))
+    (is (= 17 (animate-file "src/advent_of_code/day18/input-test.txt" 5 true)))))
