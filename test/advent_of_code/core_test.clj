@@ -15,7 +15,8 @@
             [advent-of-code.day14.core :refer [process-file process-points]]
             [advent-of-code.day15.core :refer [max-score max-score-calories]]
             [advent-of-code.day17.core :refer [find-target-combos]]
-            [advent-of-code.day18.core :refer [animate-file]]))
+            [advent-of-code.day18.core :refer [animate-file]]
+            [advent-of-code.day19.core :refer [count-new-molecules count-reduction-steps]]))
 
 (deftest day-01
   (testing "Floor."
@@ -171,3 +172,11 @@
   (testing "Animation"
     (is (= 4 (animate-file "src/advent_of_code/day18/input-test.txt" 4 false)))
     (is (= 17 (animate-file "src/advent_of_code/day18/input-test.txt" 5 true)))))
+
+
+(deftest day-19
+  (testing "Replacements"
+    (is (= 4 (count-new-molecules "src/advent_of_code/day19/input-test.txt")))
+    (is (= 7 (count-new-molecules "src/advent_of_code/day19/input-test-2.txt")))
+    (is (= 3 (count-reduction-steps "src/advent_of_code/day19/input-test-3.txt")))
+    (is (= 6 (count-reduction-steps "src/advent_of_code/day19/input-test-4.txt")))))
