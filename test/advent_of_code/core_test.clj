@@ -16,7 +16,8 @@
             [advent-of-code.day15.core :refer [max-score max-score-calories]]
             [advent-of-code.day17.core :refer [find-target-combos]]
             [advent-of-code.day18.core :refer [animate-file]]
-            [advent-of-code.day19.core :refer [count-new-molecules count-reduction-steps]]))
+            [advent-of-code.day19.core :refer [count-new-molecules count-reduction-steps]]
+            [advent-of-code.day20.core :refer [presents-for-house house-with-at-least-presents]]))
 
 (deftest day-01
   (testing "Floor."
@@ -180,3 +181,16 @@
     (is (= 7 (count-new-molecules "src/advent_of_code/day19/input-test-2.txt")))
     (is (= 3 (count-reduction-steps "src/advent_of_code/day19/input-test-3.txt")))
     (is (= 6 (count-reduction-steps "src/advent_of_code/day19/input-test-4.txt")))))
+
+(deftest day-20
+  (testing "Presents"
+    (is (= 10 (presents-for-house 1)))
+    (is (= 30 (presents-for-house 2)))
+    (is (= 40 (presents-for-house 3)))
+    (is (= 70 (presents-for-house 4)))
+    (is (= 60 (presents-for-house 5)))
+    (is (= 120 (presents-for-house 6)))
+    (is (= 80 (presents-for-house 7)))
+    (is (= 150 (presents-for-house 8)))
+    (is (= 130 (presents-for-house 9)))
+    (is (= 8 (house-with-at-least-presents 150 10)))))
