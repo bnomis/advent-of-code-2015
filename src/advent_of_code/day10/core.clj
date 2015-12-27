@@ -44,5 +44,5 @@
 
 
 (defn run []
-  (println "Day 10, part 1" (count (encode-loop "1113122113" 40)))
-  (println "Day 10, part 2" (count (encode-loop "1113122113" 50))))
+  (println "Day 10, part 1:" (count (encode-loop "1113122113" 40)))
+  (println "Day 10, part 2:" (count (encode-loop "1113122113" 50))))

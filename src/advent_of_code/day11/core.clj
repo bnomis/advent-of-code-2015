@@ -124,5 +124,5 @@
         (recur (inc-alpha-numbers numbers))))))
 
 (defn run []
-  (println "Day 11, part 1" (next-password "cqjxjnds"))
-  (println "Day 11, part 2" (next-password "cqjxxyzz")))
+  (println "Day 11, part 1:" (next-password "cqjxjnds"))
+  (println "Day 11, part 2:" (next-password "cqjxxyzz")))

@@ -104,5 +104,5 @@
     (:sue (first sorted))))
 
 (defn run []
-  (println "Day 16, part 1:" (find-sue "src/advent_of_code/day16/input.txt" false))
-  (println "Day 16, part 2:" (find-sue "src/advent_of_code/day16/input.txt" true)))
+  (println "Day 16, part 1:" (:sue (find-sue "src/advent_of_code/day16/input.txt" false)))
+  (println "Day 16, part 2:" (:sue (find-sue "src/advent_of_code/day16/input.txt" true))))

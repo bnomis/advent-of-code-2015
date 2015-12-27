@@ -92,5 +92,5 @@
     (reduce + numbers)))
 
 (defn run []
-  (println "Day 12, part 1" (read-numbers "src/advent_of_code/day12/input.txt"))
-  (println "Day 12, part 2" (structured-read "src/advent_of_code/day12/input.txt")))
+  (println "Day 12, part 1:" (read-numbers "src/advent_of_code/day12/input.txt"))
+  (println "Day 12, part 2:" (structured-read "src/advent_of_code/day12/input.txt")))

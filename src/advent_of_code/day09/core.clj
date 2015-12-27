@@ -338,5 +338,5 @@
   (:distance (last (find-ordered-routes file))))
 
 (defn run []
-  (println "Day 09, part 1" (find-shortest "src/advent_of_code/day09/input.txt"))
-  (println "Day 09, part 2" (find-longest "src/advent_of_code/day09/input.txt")))
+  (println "Day 09, part 1:" (find-shortest "src/advent_of_code/day09/input.txt"))
+  (println "Day 09, part 2:" (find-longest "src/advent_of_code/day09/input.txt")))

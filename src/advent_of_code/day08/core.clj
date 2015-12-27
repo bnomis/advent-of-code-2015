@@ -121,5 +121,5 @@
     (reduce-lines)))
 
 (defn run []
-  (println "Day 08, part 1" (parse-file "src/advent_of_code/day08/input.txt"))
-  (println "Day 08, part 2" (parse-file-2 "src/advent_of_code/day08/input.txt")))
+  (println "Day 08, part 1:" (parse-file "src/advent_of_code/day08/input.txt"))
+  (println "Day 08, part 2:" (parse-file-2 "src/advent_of_code/day08/input.txt")))
