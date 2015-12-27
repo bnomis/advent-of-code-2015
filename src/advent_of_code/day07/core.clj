@@ -188,5 +188,5 @@
     (:a results)))
 
 (defn run []
-  (println "Day 07, part 1: a =" (run-file "src/advent_of_code/day07/input.txt"))
-  (println "Day 07, part 2: a =" (run-file "src/advent_of_code/day07/input-2.txt")))
+  (println "Day 07, part 1:" (run-file "src/advent_of_code/day07/input.txt"))
+  (println "Day 07, part 2:" (run-file "src/advent_of_code/day07/input-2.txt")))
