@@ -90,7 +90,7 @@
 (defn filter-matches [parts target]
   (filter #(matches? % target) parts))
 
-(defn distribute-weights [weights sub]
+(defn distribute-weights3 [weights sub]
   (let [sum (reduce + weights)
         target (/ sum sub)
         parts (partition-weights weights sub)
@@ -98,6 +98,30 @@
         shortest (shortest-group parts)
         parts (filter #(contains-length % shortest) parts)
         shortest-qes (mapv qe-of-shortest parts)]
+    (apply min shortest-qes)))
+
+(defn find-combos [weights target length]
+  (for [g (combo/combinations weights length)
+        :when (= target (reduce + g))]
+        g))
+
+(defn find-shortest-combos [weights target start]
+  (let [length (count weights)]
+    (loop [i start]
+      (if (>= i length)
+        nil
+        (let [groups (find-combos weights target i)]
+          (if (not-empty groups)
+            groups
+            (recur (inc i))))))))
+
+
+;; this works and is quick but does not check the other groups in a set are good
+(defn distribute-weights [weights sub]
+  (let [sum (reduce + weights)
+        target (/ sum sub)
+        groups (find-shortest-combos weights target 1)
+        shortest-qes (mapv qe groups)]
     (apply min shortest-qes)))
 
 (defn read-weights [file]
