@@ -7,3 +7,5 @@ https://www.reddit.com/r/adventofcode
 How To run
 
 How To test
+
+lein test :only advent-of-code.core-test/day-25

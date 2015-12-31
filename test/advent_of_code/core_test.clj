@@ -17,7 +17,8 @@
             [advent-of-code.day17.core :refer [find-target-combos]]
             [advent-of-code.day18.core :refer [animate-file]]
             [advent-of-code.day19.core :refer [count-new-molecules count-reduction-steps]]
-            [advent-of-code.day20.core :refer [presents-for-house house-with-at-least-presents]]))
+            [advent-of-code.day20.core :refer [presents-for-house house-with-at-least-presents]]
+            [advent-of-code.day25.core :refer [build-grid read-code-at]]))
 
 (deftest day-01
   (testing "Floor."
@@ -194,3 +195,11 @@
     (is (= 150 (presents-for-house 8)))
     (is (= 130 (presents-for-house 9)))
     (is (= 8 (house-with-at-least-presents 150 10)))))
+
+(deftest day-25
+  (testing "Codes"
+    (let [grid (build-grid 20151125 252533 33554393 2)]
+      (is (= 20151125 (read-code-at grid 0 0)))
+      (is (= 18749137 (read-code-at grid 0 1)))
+      (is (= 31916031 (read-code-at grid 1 0)))
+      (is (= 21629792 (read-code-at grid 1 1))))))
