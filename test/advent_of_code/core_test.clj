@@ -194,7 +194,7 @@
     (is (= 80 (presents-for-house 7)))
     (is (= 150 (presents-for-house 8)))
     (is (= 130 (presents-for-house 9)))
-    (is (= 8 (house-with-at-least-presents 150 10)))))
+    (is (= 8 (house-with-at-least-presents 150)))))
 
 (deftest day-25
   (testing "Codes"
