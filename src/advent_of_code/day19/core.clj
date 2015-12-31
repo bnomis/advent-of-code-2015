@@ -103,15 +103,38 @@
 (defn terminal? [s]
   (set/subset? #{s} @terminal-set))
 
+(defn not-terminal? [s]
+  (not (terminal? s)))
+
+(defn contains-e? [reductions]
+  (some #(= "e" %) reductions))
+
+(def shortest-length (atom 0))
+
+(defn reset-shortest-length []
+  (reset! shortest-length 0))
+
+(defn record-shortest-len [len]
+  (if (or (= 0 @shortest-length) (< len @shortest-length))
+    (reset! shortest-length len)))
+
 (defn reducer [start replacements history]
+  (if (= 0 @shortest-length)
+    (let [reductions (make-reductions start replacements)]
+      (if (not-empty reductions)
+        (if (contains-e? reductions)
+          (record-shortest-len (+ (count history) 1))
+          (mapv #(reducer % replacements (conj history %)) (filter not-terminal? reductions)))
+        (add-to-terminal-set start)))))
+
+(defn reducer2 [start replacements history]
   (let [reductions (make-reductions start replacements)]
-    (if-not (empty? reductions)
-      (do
-        (doseq [r reductions]
-          (if (= r "e")
-            (add-to-found-list (conj history r))
-            (when-not (terminal? r)
-              (reducer r replacements (conj history r))))))
+    (if (not-empty reductions)
+      (doseq [r reductions]
+        (if (= r "e")
+          (add-to-found-list (conj history r))
+          (when-not (terminal? r)
+            (reducer r replacements (conj history r)))))
       (add-to-terminal-set start))))
 
 (defn compare-replacements [x y]
@@ -172,8 +195,9 @@
   (reset! terminal-set #{})
   (reset! reductions-atom #{})
   (reset! smallest 0)
+  (reset-shortest-length)
   (reduce-to-e file)
-  @smallest)
+  @shortest-length)
 
 
 (defn run []
