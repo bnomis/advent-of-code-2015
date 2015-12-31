@@ -70,7 +70,7 @@
   (loop [out 0
           row (first grid)
           grid (rest grid)]
-    (if (not row)
+    (if-not row
       out
       (recur (+ out (count-row-ons row)) (first grid) (rest grid)))))
 
@@ -84,7 +84,7 @@
     (loop [out []
             c (first chars)
             chars (rest chars)]
-      (if (not c)
+      (if-not c
         out
         (recur (conj out (char->state c)) (first chars) (rest chars))))))
 

@@ -13,7 +13,7 @@
   (loop [caps []
           c (first combo)
           combo (rest combo)]
-    (if (not c)
+    (if-not c
       (reduce + caps)
       (recur (conj caps (letter->capacity normalised c)) (first combo) (rest combo)))))
 
@@ -25,7 +25,7 @@
           index 0
           c (first containers)
           containers (rest containers)]
-    (if (not c)
+    (if-not c
       out
       (recur (assoc out (index->letter index) c) (inc index) (first containers) (rest containers)))))
 
@@ -48,7 +48,7 @@
         length (count containers)]
     (loop [combos []
             t 1]
-      (if (or (> (count combos) 0) (> t length))
+      (if (or (pos? (count combos)) (> t length))
         combos
         (recur (find-combos normalised target t) (inc t))))))
 

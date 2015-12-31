@@ -49,7 +49,7 @@
 (defn score-add [out ingredients values]
   (let [scores (make-scores ingredients values)
         total (reduce-scores scores)]
-    (if (= total 0)
+    (if (zero? total)
       out
       (conj out total))))
 
@@ -74,7 +74,7 @@
     out
     (let [scores (make-scores ingredients values)
           total (reduce-scores scores)]
-      (if (= total 0)
+      (if (zero? total)
         out
         (conj out total)))))
 
@@ -87,9 +87,9 @@
       (recur (score-add-calories out ingredients v calories) (first values) (rest values)))))
 
 (defn remove-last-char [s]
-  (let [parts (into [] (seq s))
+  (let [parts (vec (seq s))
         length (count parts)]
-    (apply str (subvec parts 0 (- length 1)))))
+    (str/join (subvec parts 0 (- length 1)))))
 
 (defn line->ingredient [line]
   (let [tokes (str/split line #" ")

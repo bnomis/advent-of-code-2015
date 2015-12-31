@@ -38,10 +38,9 @@
                                   :bad-string false}]
                   (if-not this
                     results
-                    (do
-                      (if (bad-string (str last this))
-                        (assoc results :bad-string true)
-                        (recur this (first chars) (rest chars) (update-results results last this))))))]
+                    (if (bad-string (str last this))
+                      (assoc results :bad-string true)
+                      (recur this (first chars) (rest chars) (update-results results last this)))))]
     ;;(println input results)
     (if (and (= (:bad-string results) false) (>= (:vowel-count results) 3) (>= (:repeat-count results) 1))
       true
@@ -54,9 +53,7 @@
     (if-not l
       false
       (if (= l p)
-        (do
-          ;;(println "matched:" l p)
-          true)
+        true
         (recur (first pairs) (rest pairs))))))
 
 (defn check-pairs [pairs]
@@ -84,18 +81,12 @@
 
 (defn has-pair [input]
   (let [p (check-pairs (make-pairs (seq input)))]
-    (if p
-      p
-      false)))
+    (or p false)))
 
 (defn has-pair2 [input]
   (let [p (check-pairs (make-pairs (seq input)))]
-    (if p
-      p
-      (let [p (check-pairs (make-pairs (rest (seq input))))]
-        (if p
-          p
-          false)))))
+    (or p (let [p (check-pairs (make-pairs (rest (seq input))))]
+            (or p false)))))
 
 (defn has-repeat [input]
   (let [chars (seq input)
@@ -111,9 +102,7 @@
   (let [p (has-pair input)
         r (has-repeat input)]
     (if (and p r)
-      (do
-        ;;(println "nice:" input p r)
-        true)
+      true
       false)))
 
 (defn run []

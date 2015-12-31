@@ -64,5 +64,4 @@
   [& args]
   (if (empty? args)
     (run-all)
-    (do
-      (mapv #(run-day %) args))))
+    (mapv run-day args)))

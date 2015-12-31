@@ -78,8 +78,7 @@
   (let [totals (present-totals p)
         p (/ p 10)]
     (loop [i 1]
-      (if (>= i p)
-        nil
+      (when-not (>= i p)
         (if (>= (get totals i) p)
           i
           (recur (inc i)))))))
@@ -96,8 +95,7 @@
 (defn check-totals [totals houses-per-elf elf target]
   (let [max (- houses-per-elf 1)]
     (loop [counter 0]
-      (if (> counter max)
-        nil
+      (when-not (> counter max)
         (let [house (+ elf (* counter elf))]
           (if (>= (get totals house) target)
             house

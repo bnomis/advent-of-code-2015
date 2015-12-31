@@ -141,18 +141,14 @@
             keys (rest keys)]
       (if-not k
         true
-        (do
-          (if (vector? (get results k))
-            false
-            (recur (first keys) (rest keys))))))))
+        (if (vector? (get results k))
+          false
+          (recur (first keys) (rest keys)))))))
 
 (defn resolve-circuit [results]
   (loop [results results]
-    ;;(println "resolve-circuit:" results)
     (if (all-resolved results)
-      (do
-        ;;(println "all resolved")
-        results)
+      results
       (recur (ripple results)))))
 
 (defn parse-line [results line]

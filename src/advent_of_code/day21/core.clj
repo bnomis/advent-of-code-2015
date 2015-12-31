@@ -83,14 +83,12 @@
       nil)))
 
 (defn get-weapon [weapon]
-  (if (and weapon (> weapon -1))
-    (nth (:weapons shop) weapon)
-    nil))
+  (when (and weapon (> weapon -1))
+    (nth (:weapons shop) weapon)))
 
 (defn get-armor [armor]
-  (if (and armor (> armor -1))
-    (nth (:armor shop) armor)
-    nil))
+  (when (and armor (> armor -1))
+    (nth (:armor shop) armor)))
 
 (defn get-rings [rings]
   (if (seq? rings)
@@ -100,9 +98,8 @@
       (if-not r
         out
         (recur (conj out (nth (:rings shop) r)) (first rings) (rest rings))))
-    (if (and rings (> rings -1))
-      [(nth (:rings shop) rings)]
-      nil)))
+    (when (and rings (> rings -1))
+      [(nth (:rings shop) rings)])))
 
 (defn build-config [[weapon armor rings]]
   ;;(println "build-config:" weapon armor rings)

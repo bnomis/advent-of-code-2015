@@ -63,9 +63,7 @@
     ;;(println line)
     (loop [data {:count 0 :index 0}]
       (if (> (:index data) (- length 1))
-        (do
-          ;;(println data)
-          (:count data))
+        (:count data)
         (recur (consume-char line data))))))
 
 (defn is-special [c]
@@ -76,21 +74,17 @@
 
 (defn encode [encoded c]
   (if (is-special c)
-    (do
-      (-> encoded
-        (conj backslash)
-        (conj c)))
-    (do
-      (conj encoded c))))
+    (-> encoded
+      (conj backslash)
+      (conj c))
+    (conj encoded c)))
 
 (defn encoded-count [line]
   (loop [c (first line)
           line (rest line)
           encoded []]
     (if-not c
-      (do
-        ;;(println encoded)
-        (+ 2 (count encoded)))
+      (+ 2 (count encoded))
       (recur (first line) (rest line) (encode encoded c)))))
 
 (defn parse-line [line]

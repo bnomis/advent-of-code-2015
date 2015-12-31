@@ -74,10 +74,10 @@
       (if-not e
         (assoc state :effects out)
         (let [timer (- (:timer e) 1)
-              fn (get-in e [:spell :apply])]
+              func (get-in e [:spell :apply])]
           (if (> timer 0)
-            (recur (fn state) (conj out (assoc e :timer timer)) (first effects) (rest effects))
-            (recur (fn state) out (first effects) (rest effects))))))))
+            (recur (func state) (conj out (assoc e :timer timer)) (first effects) (rest effects))
+            (recur (func state) out (first effects) (rest effects))))))))
 
 (defn player-dead? [state]
   (<= (get-in state [:player :hit-points]) 0))

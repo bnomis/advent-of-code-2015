@@ -1,18 +1,19 @@
 (ns advent-of-code.day04.core
-  (:import (java.security MessageDigest)))
+  (:import (java.security MessageDigest))
+  (:require [clojure.string :as str]))
 
 (defn starts-with-five-zeros [number]
-  (if (= "00000" (apply str (take 5 (seq number))))
+  (if (= "00000" (str/join (take 5 (seq number))))
     true
     false))
 
 (defn starts-with-six-zeros [number]
-  (if (= "000000" (apply str (take 6 (seq number))))
+  (if (= "000000" (str/join (take 6 (seq number))))
     true
     false))
 
 (defn make-hex [input]
-  (apply str (map (partial format "%02x") input)))
+  (str/join (map (partial format "%02x") input)))
 
 (defn make-md5 [input]
   (let [md (MessageDigest/getInstance "MD5")

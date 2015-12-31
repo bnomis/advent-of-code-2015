@@ -25,7 +25,7 @@
         before (subvec chars 0 index)
         after (subvec chars (+ index from-length))
         parts (concat before to after)]
-    (conj out (apply str parts))))
+    (conj out (str/join parts))))
 
 (defn replace-do [start replacement]
   (let [length (count start)

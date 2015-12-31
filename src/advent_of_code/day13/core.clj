@@ -29,7 +29,7 @@
 (defn neighbours-in-arrangement [arrangement index]
   (let [length (count arrangement)
         center (nth arrangement index)
-        left (if (= index 0) (- length 1) (- index 1))
+        left  (if (= index 0) (- length 1) (- index 1))
         right (if (= index (- length 1)) 0 (+ index 1))]
     [[center (nth arrangement left)] [center (nth arrangement right)]]))
 
@@ -59,11 +59,11 @@
 
 (defn guest-list [normalised]
   ;;(println "guest-list:" normalised)
-  (into [] (keys normalised)))
+  (vec (keys normalised)))
 
 (defn make-arrangements [guests]
   ;;(println "make-arrangements:" guests)
-  (into [] (combo/permutations guests)))
+  (vec (combo/permutations guests)))
 
 (defn add-link [out [person1 person2 cost]]
   (let [path [person1 person2]]
@@ -79,9 +79,9 @@
       (recur (add-link out l) (first links) (rest links)))))
 
 (defn remove-last-char [s]
-  (let [parts (into [] (seq s))
+  (let [parts (vec (seq s))
         length (count parts)]
-    (apply str (subvec parts 0 (- length 1)))))
+    (str/join (subvec parts 0 (- length 1)))))
 
 (defn line->link [line]
   (let [tokes (str/split line #" ")
@@ -105,15 +105,6 @@
 
 (defn least-happy [sorted]
   (first sorted))
-
-(defn process-file [file]
-  (let [links (read-links file)
-        normalised (normalise-links links)
-        guests (guest-list normalised)
-        arrangements (make-arrangements guests)
-        costed (cost-arrangements normalised arrangements)
-        sorted (sort-arrangements costed)]
-    sorted))
 
 (defn add-me-to-normalised [normalised]
   (let [keys (keys normalised)]

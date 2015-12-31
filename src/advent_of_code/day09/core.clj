@@ -28,18 +28,17 @@
 
 (defn link-source [link]
   (let [length (count link)]
-    (if (= length 3)
-      (get link 0)
-      nil)))
+    (when (= length 3)
+      (get link 0))))
 
 (defn link-reverse [link]
   [(get link 1) (get link 0) (get link 2)])
 
 (defn exit->link [source exit]
-  (into [] (cons source exit)))
+  (vec (cons source exit)))
 
 (defn link->exit [link]
-  (into [] (rest link)))
+  (vec (rest link)))
 
 (defn find-link [links city]
   (loop [l (first links)
@@ -113,16 +112,10 @@
       (recur (conj-if-not-visited visited out link) (first exits) (rest exits)))))
 
 (defn next-exit [normalised visited current]
-  ;;(println "next-exit: visited" visited)
-  ;;(println "next-exit: current" current)
   (let [exits (get normalised current)
         filtered-exits (filter-exits visited exits)
         sorted-exits (sort-exits filtered-exits)]
-    ;;(println "next-exit: exits:" exits)
-    ;;(println "next-exit: filtered:" filtered-exits)
-    ;;(println "next-exit: sorted:" sorted-exits)
-    (if (empty? sorted-exits)
-      nil
+    (when (not-empty sorted-exits)
       (first sorted-exits))))
 
 (defn find-journey [normalised link]
@@ -157,8 +150,7 @@
   (let [exits (get normalised current)
         filtered-exits (filter-exits visited exits)
         sorted-exits (sort-exits-long filtered-exits)]
-    (if (empty? sorted-exits)
-      nil
+    (when (not-empty sorted-exits)
       (first sorted-exits))))
 
 (defn find-journey-long [normalised link]
@@ -213,28 +205,27 @@
 (defn add-route-data [data route]
   (if (= 1 (count route))
     (update data :terminals #(conj % (get route 0)))
-    (update data :non-terminals #(into [] (concat % route)))))
+    (update data :non-terminals #(vec (concat % route)))))
 
 (defn find-routes [normalised routes terminals]
   ;;(println "find-routes: routes:" routes)
   ;;(println "find-routes: terminals:" terminals)
   (if (or (empty? routes) (not routes))
     terminals
-    (do
-      ;; extend our input routes if possible
-      (let [extended (loop [out []
-                            r (first routes)
-                            routes (rest routes)]
-                        (if-not r
-                          out
-                          (recur (conj out (add-exits normalised r)) (first routes) (rest routes))))
-            filtered (loop [data {:terminals [] :non-terminals []}
-                            e (first extended)
-                            extended (rest extended)]
-                      (if-not e
-                        data
-                        (recur (add-route-data data e) (first extended) (rest extended))))]
-        (find-routes normalised (:non-terminals filtered) (into [] (concat terminals (:terminals filtered))))))))
+    ;; extend our input routes if possible
+    (let [extended (loop [out []
+                          r (first routes)
+                          routes (rest routes)]
+                      (if-not r
+                        out
+                        (recur (conj out (add-exits normalised r)) (first routes) (rest routes))))
+          filtered (loop [data {:terminals [] :non-terminals []}
+                          e (first extended)
+                          extended (rest extended)]
+                    (if-not e
+                      data
+                      (recur (add-route-data data e) (first extended) (rest extended))))]
+      (find-routes normalised (:non-terminals filtered) (vec (concat terminals (:terminals filtered)))))))
 
 (defn start-find-routes [normalised]
   (let [keys (keys normalised)]
@@ -243,7 +234,7 @@
             keys (rest keys)]
       (if-not k
         out
-        (recur (into [] (concat out (find-routes normalised [[k]] []))) (first keys) (rest keys))))))
+        (recur (vec (concat out (find-routes normalised [[k]] []))) (first keys) (rest keys))))))
 
 ;; normalisation
 

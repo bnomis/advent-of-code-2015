@@ -9,9 +9,9 @@
   (= 1 (get registers (keyword reg))))
 
 (defn remove-last-char [s]
-  (let [parts (into [] (seq s))
+  (let [parts (vec (seq s))
         length (count parts)]
-    (apply str (subvec parts 0 (- length 1)))))
+    (str/join (subvec parts 0 (- length 1)))))
 
 (defn jump-parse [reg off]
   [(remove-last-char reg) (Integer/parseInt off)])

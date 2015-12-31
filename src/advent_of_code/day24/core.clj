@@ -108,8 +108,7 @@
 (defn find-shortest-combos [weights target start]
   (let [length (count weights)]
     (loop [i start]
-      (if (>= i length)
-        nil
+      (when-not (>= i length)
         (let [groups (find-combos weights target i)]
           (if (not-empty groups)
             groups

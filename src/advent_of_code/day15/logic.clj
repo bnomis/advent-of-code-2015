@@ -1,6 +1,6 @@
 (ns advent-of-code.day15.logic
   (:refer-clojure :exclude [==])
-  (:use clojure.core.logic)
+  (:use [clojure.core.logic :only [run* fresh ==]])
   (:require
     [clojure.core.logic.fd :as fd]))
 

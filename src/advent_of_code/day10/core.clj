@@ -24,7 +24,7 @@
 
 (defn encode-run [run]
   (let [length (count run)]
-    (apply str [length (first run)])))
+    (str/join [length (first run)])))
 
 (defn encode [input]
   (let [rs (runs input)]
@@ -32,13 +32,13 @@
             r (first rs)
             rs (rest rs)]
       (if-not r
-        (apply str out)
+        (str/join out)
         (recur (conj out (encode-run r)) (first rs) (rest rs))))))
 
 (defn encode-loop [input count]
   (loop [count count
           input input]
-    (if (= 0 count)
+    (if (zero? count)
       input
       (recur (dec count) (encode input)))))
 

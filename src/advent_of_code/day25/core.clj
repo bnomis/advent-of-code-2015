@@ -69,9 +69,9 @@
           (recur row col value))))))
 
 (defn remove-last-char [s]
-  (let [parts (into [] (seq (str/trim s)))
+  (let [parts (vec (seq (str/trim s)))
         length (count parts)]
-    (apply str (subvec parts 0 (- length 1)))))
+    (str/join (subvec parts 0 (- length 1)))))
 
 (defn make-int [token]
   (let [token (remove-last-char token)]

@@ -19,8 +19,7 @@
           input (rest input)]
     (if (= -1 floor)
       pos
-      (do
-        (recur (verticalise floor current) (inc pos) (first input) (rest input))))))
+      (recur (verticalise floor current) (inc pos) (first input) (rest input)))))
 
 (defn run []
   (let [input (seq (slurp "src/advent_of_code/day01/input.txt"))

@@ -43,7 +43,7 @@
     (loop [scores []
             k (first keys)
             keys (rest keys)]
-      (if (not k)
+      (if-not k
         (reduce + scores)
         (recur (conj scores (abs-diff-sue sue k retro)) (first keys) (rest keys))))))
 
@@ -51,7 +51,7 @@
   (loop [out []
           s (first sues)
           sues (rest sues)]
-    (if (not s)
+    (if-not s
       out
       (recur (conj out {:score (sue->score s retro) :sue s}) (first sues) (rest sues)))))
 
@@ -59,15 +59,15 @@
   (sort-by :score sues))
 
 (defn remove-last-char [s]
-  (let [parts (into [] (seq s))
+  (let [parts (vec (seq s))
         length (count parts)]
-    (apply str (subvec parts 0 (- length 1)))))
+    (str/join (subvec parts 0 (- length 1)))))
 
 (defn remove-trailing-comma [s]
-  (let [parts (into [] (seq s))
+  (let [parts (vec (seq s))
         length (count parts)]
     (if (= (last parts) \,)
-      (apply str (subvec parts 0 (- length 1)))
+      (str/join (subvec parts 0 (- length 1)))
       s)))
 
 (defn extract-thing [out [key value]]
@@ -79,7 +79,7 @@
   (loop [out {}
           t (first things)
           things (rest things)]
-    (if (not t)
+    (if-not t
       out
       (recur (extract-thing out t) (first things) (rest things)))))
 

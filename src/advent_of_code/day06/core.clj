@@ -2,10 +2,10 @@
   (:require [clojure.string :as str]))
 
 (defn make-row [width]
-  (into [] (repeat width 0)))
+  (vec (repeat width 0)))
 
 (defn make-grid [width height]
-  (into [] (repeatedly height #(make-row width))))
+  (vec (repeatedly height #(make-row width))))
 
 (defn turn-on [grid x y]
   (assoc-in grid [y x] 1))
@@ -15,7 +15,7 @@
 
 (defn toggle [grid x y]
   (let [current (get-in grid [y x])
-        new (if (= 0 current) 1 0)]
+        new (if (zero? current) 1 0)]
     (assoc-in grid [y x] new)))
 
 (defn turn-on-2 [grid x y]

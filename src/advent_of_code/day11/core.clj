@@ -36,7 +36,7 @@
           n (first numbers)
           numbers (rest numbers)]
     (if-not n
-      (apply str out)
+      (str/join out)
       (recur (conj out (index->letter n)) (first numbers) (rest numbers)))))
 
 (defn inc-past-bad [in]
@@ -60,13 +60,12 @@
             old (first numbers)
             numbers (rest numbers)]
       (if-not old
-        (into [] (reverse out))
-        (do
-          (let [new (inc-alpha-number old)
-                did-wrap (wrapped old new)]
-            (if (not did-wrap)
-              (into [] (reverse (concat out [new] numbers)))
-              (recur (conj out new) (first numbers) (rest numbers)))))))))
+        (vec (reverse out))
+        (let [new (inc-alpha-number old)
+              did-wrap (wrapped old new)]
+          (if-not did-wrap
+            (vec (reverse (concat out [new] numbers)))
+            (recur (conj out new) (first numbers) (rest numbers))))))))
 
 (defn has-bad-ints [numbers]
   (> (count (set/intersection bad-ints (into #{} numbers))) 0))
